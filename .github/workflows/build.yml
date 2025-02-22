@@ -17,10 +17,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
-      - name: Install Dependencies
-        run: pip install mlflow pylint
-
+      
       - name: Run SonarCloud Analysis
         run: |
           mvn clean verify sonar:sonar \
@@ -28,9 +25,6 @@ jobs:
             -Dsonar.organization=Lok-Jagruti-Kendra-University \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-      - name: Run AI Model Evaluation (MLflow)
-        run: python evaluate.py  # Replace with your AI model script
 
       - name: Aggregate Scores
         run: python calculate_scores.py  # Custom script for scoring
