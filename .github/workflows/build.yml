@@ -24,8 +24,8 @@ jobs:
       - name: Run SonarCloud Analysis
         run: |
           mvn clean verify sonar:sonar \
-            -Dsonar.projectKey=your_project_key \
-            -Dsonar.organization=your_organization \
+            -Dsonar.projectKey=Lok-Jagruti-Kendra-University_testai \
+            -Dsonar.organization=Lok-Jagruti-Kendra-University \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
