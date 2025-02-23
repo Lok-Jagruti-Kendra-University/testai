@@ -7,8 +7,11 @@ def fetch_sonarcloud_score():
         "component": "Lok-Jagruti-Kendra-University_testai",  # Your SonarCloud project key
         "metricKeys": "coverage,bugs,code_smells"
     }
-    response = requests.get(url)
-    return response.text
+    response = requests.get(url, params=params)
+    # Debugging output
+    print("Response Status Code:", response.status_code)
+    print("Response Content:", response.text)  
+    
     if response.status_code == 200:
         data = response.json()
         measures = data.get("component", {}).get("measures", [])
