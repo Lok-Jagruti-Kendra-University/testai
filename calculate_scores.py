@@ -1,18 +1,23 @@
 import requests
 
 def fetch_sonarcloud_score():
-    """Fetch the SonarCloud quality gate status."""
-    url = "https://sonarcloud.io/api/project_badges/measure"
+    """Fetch SonarCloud quality metrics."""
+    url = "https://sonarcloud.io/api/measures/component"
     params = {
-        "project": "Lok-Jagruti-Kendra-University_testai",
-        "metric": "alert_status"
+        "component": "Lok-Jagruti-Kendra-University_testai",  # Your SonarCloud project key
+        "metricKeys": "coverage,bugs,code_smells"
     }
     response = requests.get(url)
-    data = response.json()
     
-    if "measure" in data:
-        return 100 if data["measure"]["value"] == "OK" else 50
-    return 0  # Default to 0 if no data is found
+    if response.status_code == 200:
+        data = response.json()
+        measures = data.get("component", {}).get("measures", [])
+        
+        # Example: Extracting coverage score
+        coverage = next((m["value"] for m in measures if m["metric"] == "coverage"), 0)
+        return float(coverage)
+    
+    return 0  # Default to 0 if request fails
 
 def fetch_mlflow_score():
     """Fetch an example MLflow metric (dummy API, replace with real MLflow API)."""
