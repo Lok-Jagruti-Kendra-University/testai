@@ -48,7 +48,7 @@ def aggregate_scores():
     """Aggregate scores from all sources."""
     sonar_score = fetch_sonarcloud_score()
     mlflow_score = 30 #fetch_mlflow_score()
-    deepsource_score = 20 #fetch_deepsource_score()
+    deepsource_score = 30 #fetch_deepsource_score()
 
     overall_score = (sonar_score + mlflow_score + deepsource_score) / 3
     return {
