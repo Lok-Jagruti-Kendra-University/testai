@@ -8,7 +8,7 @@ def fetch_sonarcloud_score():
         "metricKeys": "coverage,bugs,code_smells"
     }
     response = requests.get(url)
-    return response
+    return response.status_code
     if response.status_code == 200:
         data = response.json()
         measures = data.get("component", {}).get("measures", [])
