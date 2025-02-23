@@ -5,7 +5,7 @@ def fetch_sonarcloud_score():
     url = "https://sonarcloud.io/api/measures/component"
     params = {
         "component": "Lok-Jagruti-Kendra-University_testai",  # Your SonarCloud project key
-        "metricKeys": "coverage,bugs,code_smells"
+        "metric": "coverage,bugs,code_smells"
     }
     response = requests.get(url)
     
@@ -14,8 +14,8 @@ def fetch_sonarcloud_score():
         measures = data.get("component", {}).get("measures", [])
         
         # Example: Extracting coverage score
-        coverage = next((m["value"] for m in measures if m["metric"] == "coverage"), 0)
-        return float(coverage)
+        code_smells = next((m["value"] for m in measures if m["metric"] == "code_smells"), 0)
+        return float(code_smells)
     
     return 0  # Default to 0 if request fails
 
