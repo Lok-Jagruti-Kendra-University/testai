@@ -5,10 +5,10 @@ def fetch_sonarcloud_score():
     url = "https://sonarcloud.io/api/measures/component"
     params = {
         "component": "Lok-Jagruti-Kendra-University_testai",  # Your SonarCloud project key
-        "metric": "coverage,bugs,code_smells"
+        "metricKeys": "coverage,bugs,code_smells"
     }
     response = requests.get(url)
-    
+    return response
     if response.status_code == 200:
         data = response.json()
         measures = data.get("component", {}).get("measures", [])
