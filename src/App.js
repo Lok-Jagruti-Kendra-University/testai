@@ -1,55 +1,72 @@
+import React, { useState, useEffect } from 'react';    
+import logo from './logo.svg';
 import './App.css';
-import {useState } from "react";
-
-function App({id,pname}) {
-  
-  const [inputs, setInputs] = useState({});
-  const [textarea, setTextarea] = useState(
-    "The content of a textarea goes in the value attribute"
-  );
-
-  const handleChangeTA = (event) => {
-    setTextarea(event.target.value)
+function Head(){
+  return <h1>Hello</h1>
+}
+function App() {
+  const [textBoxValue, setTextBoxValue] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted!');
+    console.log('Text Box Value:', textBoxValue);
   }
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    //console.log(name+" "+value);
-
-    setInputs(abc => ({...abc, [name]: value}))
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(inputs);
-    console.log(textarea)
-  }
-var VS= "gELOFD";
-var abc = (<label>Enter your name {id} {pname.name} {pname.lname}
-<input 
-    type="text" 
-    name="username" 
-    value={inputs.username || ""} 
-    onChange={handleChange}
-      />
-</label>);
   return (
-    <form onSubmit={handleSubmit}>
-    {abc}
-    <label>Enter your age
-    <input 
-        type="number" 
-        name="age" 
-        value={inputs.age || ""} 
-        onChange={handleChange}
-      />
-    </label> 
-    <textarea value={textarea} onChange={handleChangeTA} />
-    <input type="SUBMIT" /> 
-    </form>
+        <div>
+      <form onSubmit={handleSubmit}>
+        {/* Text Box */}
+        <label>
+          Text Box:
+          <input
+            type="text"
+            value={textBoxValue}
+            onChange={(e) => setTextBoxValue(e.target.value)}/>
+        </label>
+        <button type="submit">Submut</button>
+        </form>
+        </div>
   );
-
 }
 
-export default App;
+function CounterExample() {  
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {  
+    document.title = `You clicked ${count} times`;  
+  });  
+  
+  return (  
+    <div>  
+      <p>You clicked {count} times</p>  
+      <button onClick={() => setCount(count + 1)}>  Click me  </button>  
+    </div>  
+  );  
+}
+const SimpleForm = () => {
+  // State variables to store form input values
+  const [textBoxValue, setTextBoxValue] = useState('');
+  
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted!');
+    console.log('Text Box Value:', textBoxValue);
+    
+  };
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        {/* Text Box */}
+        <label>
+          Text Box:
+          <input type="text" value={textBoxValue}
+            onChange={(e) => setTextBoxValue(e.target.value)}/>
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  )
+}
+export {App, Head, CounterExample, SimpleForm};
