@@ -10,6 +10,7 @@ def fetch_sonarcloud_score():
     }
     response = requests.get(url, params=params)
     # Debugging output
+    
     print("Response Status Code:", response.status_code)
     print("Response Content:", response.text)  
     
