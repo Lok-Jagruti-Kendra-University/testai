@@ -4,7 +4,7 @@ import './App.css';
 function Head(){
   return <h1>Hello</h1>
 }
-var ab 2232;
+var ab2232;
 function App() {
   const [textBoxValue, setTextBoxValue] = useState('');
   const handleSubmit = (e) => {
