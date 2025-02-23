@@ -8,7 +8,7 @@ def fetch_sonarcloud_score():
         "metricKeys": "coverage,bugs,code_smells"
     }
     response = requests.get(url)
-    return response.status_code
+    return response.text
     if response.status_code == 200:
         data = response.json()
         measures = data.get("component", {}).get("measures", [])
@@ -49,7 +49,7 @@ def aggregate_scores():
     sonar_score = fetch_sonarcloud_score()
     mlflow_score = 30 #fetch_mlflow_score()
     deepsource_score = 30 #fetch_deepsource_score()
-
+    return sonar_score
     overall_score = (sonar_score + mlflow_score + deepsource_score) / 3
     return {
         "SonarCloud": sonar_score,
