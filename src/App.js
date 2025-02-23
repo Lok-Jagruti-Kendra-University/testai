@@ -25,6 +25,7 @@ function App({id,pname}) {
     console.log(inputs);
     console.log(textarea)
   }
+var VS= "gELOFD";
 var abc = (<label>Enter your name {id} {pname.name} {pname.lname}
 <input 
     type="text" 
