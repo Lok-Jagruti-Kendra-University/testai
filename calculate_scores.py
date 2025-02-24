@@ -10,7 +10,7 @@ def fetch_sonarcloud_score():
     params = {
         "component": "Lok-Jagruti-Kendra-University_testai",  # Your SonarCloud project key
         "branch":"main",
-        "metricKeys": "coverage,vulnerabilities,bugs,code_smells"
+        "metricKeys": "coverage,vulnerabilities,bugs,code_smells, security_rating, maintainability_rating, reliability_rating"
     }
     response = requests.get(url, params=params)
     # Debugging output
