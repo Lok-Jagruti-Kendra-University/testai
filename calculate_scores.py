@@ -2,6 +2,8 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
+print(pd.__version__)
+
 def fetch_sonarcloud_score():
     """Fetch SonarCloud quality metrics."""
     url = "https://sonarcloud.io/api/measures/component"
