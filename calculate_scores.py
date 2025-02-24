@@ -86,19 +86,20 @@ def fetch_sonarcloud_summary():
     metrics = {}
     
     # Example: Extracting bugs count (Modify selectors based on SonarCloud changes)
-    bugs_element = soup.find("div", class_="metric-label", text="Bugs")
+    #bugs_element = soup.find("div", class_="metric-label", text="Bugs")
+    bugs_element = soup.find("div", class_="metric-label", string="Bugs")
     if bugs_element:
         bugs_value = bugs_element.find_next_sibling("div").text.strip()
         metrics["Bugs"] = bugs_value
 
     # Example: Extracting Code Smells
-    code_smells_element = soup.find("div", class_="metric-label", text="Code Smells")
+    code_smells_element = soup.find("div", class_="metric-label", string="Code Smells")
     if code_smells_element:
         code_smells_value = code_smells_element.find_next_sibling("div").text.strip()
         metrics["Code Smells"] = code_smells_value
 
     # Example: Extracting Vulnerabilities
-    vulnerabilities_element = soup.find("div", class_="metric-label", text="Vulnerabilities")
+    vulnerabilities_element = soup.find("div", class_="metric-label", string="Vulnerabilities")
     if vulnerabilities_element:
         vulnerabilities_value = vulnerabilities_element.find_next_sibling("div").text.strip()
         metrics["Vulnerabilities"] = vulnerabilities_value
