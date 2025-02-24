@@ -131,7 +131,7 @@ def save_to_excel(data):
 
 if __name__ == "__main__":
     #summary_data = fetch_sonarcloud_summary()
-    data = fetch_sonarcloud_data()
+    data = fetch_sonarcloud_score()
     save_to_excel(data)
 
     #scores = aggregate_scores()
