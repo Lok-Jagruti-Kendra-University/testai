@@ -81,6 +81,7 @@ def fetch_sonarcloud_summary():
 
     # Parse HTML content
     soup = BeautifulSoup(response.text, "html.parser")
+    print(soup.prettify())  # Prints the full HTML of the page
     
     # Extract metrics (example: Bugs, Code Smells, Vulnerabilities)
     metrics = {}
