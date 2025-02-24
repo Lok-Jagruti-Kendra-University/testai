@@ -1,4 +1,6 @@
 import requests
+import pandas as pd
+from bs4 import BeautifulSoup
 
 def fetch_sonarcloud_score():
     """Fetch SonarCloud quality metrics."""
@@ -63,6 +65,57 @@ def aggregate_scores():
         "Overall Score": round(overall_score, 2)
     }
 
+
+# SonarCloud Summary Page URL
+SONARCLOUD_URL = "https://sonarcloud.io/summary/overall?id=Lok-Jagruti-Kendra-University_testai&branch=main"
+
+def fetch_sonarcloud_summary():
+    """Fetch and extract SonarCloud summary data."""
+    response = requests.get(SONARCLOUD_URL)
+
+    if response.status_code != 200:
+        print("Failed to fetch data from SonarCloud")
+        return None
+
+    # Parse HTML content
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    # Extract metrics (example: Bugs, Code Smells, Vulnerabilities)
+    metrics = {}
+    
+    # Example: Extracting bugs count (Modify selectors based on SonarCloud changes)
+    bugs_element = soup.find("div", class_="metric-label", text="Bugs")
+    if bugs_element:
+        bugs_value = bugs_element.find_next_sibling("div").text.strip()
+        metrics["Bugs"] = bugs_value
+
+    # Example: Extracting Code Smells
+    code_smells_element = soup.find("div", class_="metric-label", text="Code Smells")
+    if code_smells_element:
+        code_smells_value = code_smells_element.find_next_sibling("div").text.strip()
+        metrics["Code Smells"] = code_smells_value
+
+    # Example: Extracting Vulnerabilities
+    vulnerabilities_element = soup.find("div", class_="metric-label", text="Vulnerabilities")
+    if vulnerabilities_element:
+        vulnerabilities_value = vulnerabilities_element.find_next_sibling("div").text.strip()
+        metrics["Vulnerabilities"] = vulnerabilities_value
+
+    return metrics
+
+def save_to_excel(data):
+    """Save extracted data to an Excel file."""
+    if not data:
+        print("No data to save")
+        return
+
+    df = pd.DataFrame([data])  # Convert dictionary to DataFrame
+    df.to_excel("sonarcloud_summary.xlsx", index=False)  # Save to Excel
+    print("SonarCloud summary saved to sonarcloud_summary.xlsx")
+
 if __name__ == "__main__":
+    summary_data = fetch_sonarcloud_summary()
+    save_to_excel(summary_data)
+
     scores = aggregate_scores()
     print("Aggregated Scores:", scores)
