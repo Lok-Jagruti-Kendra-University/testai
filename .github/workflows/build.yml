@@ -25,7 +25,7 @@ jobs:
         run: python calculate_scores.py  # Custom script for scoring
 
       - name: Upload SonarCloud Summary Excel
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sonarcloud_summary
           path: sonarcloud_summary.xlsx
