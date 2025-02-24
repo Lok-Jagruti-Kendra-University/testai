@@ -73,7 +73,10 @@ SONARCLOUD_URL = "https://sonarcloud.io/summary/overall?id=Lok-Jagruti-Kendra-Un
 
 def fetch_sonarcloud_summary():
     """Fetch and extract SonarCloud summary data."""
-    response = requests.get(SONARCLOUD_URL)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+    }
+    response = requests.get(SONARCLOUD_URL, headers=headers)
 
     if response.status_code != 200:
         print("Failed to fetch data from SonarCloud")
